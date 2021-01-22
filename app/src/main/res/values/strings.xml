@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Lateral Flow Device Analysis</string>
+    <string name="cam_button">CAMERA</string>
+    <string name="process_button">PROCESS</string>
+    <string name="covid19_label">COVID-19 Test</string>
+    <string name="testID_label">Device ID</string>
+    <string name="result_label">Result</string>
+    <string name="time_label">Time</string>
+    <string name="empty_text">      </string>
+    <string name="share_button">SHARE</string>
+    <string name="upload_button">UPLOAD</string>
+</resources>
