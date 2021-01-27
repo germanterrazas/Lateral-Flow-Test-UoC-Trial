@@ -3,6 +3,14 @@ package uoc.ifm.dial.saamd.LFDApp.util
 class Constants {
 
     companion object{
-        const val BASE_URL = "http://192.168.0.18:3000"
+
+        // For referring to the intent content in MainActivity and Dashboard activities
+        const val INTENT_TEST_ID = "testIDValue"
+        const val INTENT_RESULT = "resultValue"
+        const val INTENT_DATE = "dateValue"
+        const val INTENT_TIME = "timeValue"
+        const val INTENT_LFD_IMAGE_NAME = "lfdImageName"
+        const val INTENT_LFD_IMAGE = "lfdImage"
+
     }
 }
