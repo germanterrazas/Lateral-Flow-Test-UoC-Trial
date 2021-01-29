@@ -213,6 +213,10 @@ class MainActivity : AppCompatActivity() {
                 height.toFloat() / aPhoto.height)
         val newWidth = (ratio * aPhoto.width).roundToInt()
         val newHeight = (ratio * aPhoto.height).roundToInt()
+        Log.d("width", width.toString())
+        Log.d("height", height.toString())
+        Log.d("nWidth", newWidth.toString())
+        Log.d("nHeight", newHeight.toString())
         val thumbnail = Bitmap.createScaledBitmap(aPhoto, newWidth, newHeight, false)
         val canvas: Canvas = Canvas(Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888));
         canvas.drawBitmap(thumbnail, 0f, 0f, null);
