@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
+import uoc.ifm.dial.saamd.LFDApp.util.Constants
 import uoc.ifm.dial.saamd.LFDApp.util.Constants.Companion.INTENT_DATE
 import uoc.ifm.dial.saamd.LFDApp.util.Constants.Companion.INTENT_LFD_IMAGE
 import uoc.ifm.dial.saamd.LFDApp.util.Constants.Companion.INTENT_LFD_IMAGE_NAME
@@ -60,7 +61,6 @@ class MainActivity : AppCompatActivity() {
 
         // Used in dispatchTakePictureIntent()
         private const val APP_URI_NAME = "uoc.ifm.dial.saamd.LFDApp"
-        private const val PHOTO_TIMESTAMP_FORMAT = "yyyyMMdd_HHmmss"
     }
 
     private lateinit var theLFDImage: Bitmap
@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity() {
                 startIntent.putExtra(INTENT_RESULT, resultValue)
                 startIntent.putExtra(INTENT_DATE, dateValue)
                 startIntent.putExtra(INTENT_TIME, timeValue)
-                startIntent.putExtra(INTENT_LFD_IMAGE_NAME, SimpleDateFormat(PHOTO_TIMESTAMP_FORMAT, Locale.UK).format(photoTimestamp))
+                startIntent.putExtra(INTENT_LFD_IMAGE_NAME, SimpleDateFormat(Constants.PHOTO_TIMESTAMP_FORMAT, Locale.UK).format(photoTimestamp))
                 startIntent.putExtra(INTENT_LFD_IMAGE, stream.toByteArray())
                 startActivity(startIntent)
             } else{
@@ -154,7 +154,7 @@ class MainActivity : AppCompatActivity() {
     private fun createImageFile(): File {
         // Create an image file name
         photoTimestamp = Date()
-        val photoTimestampStr = SimpleDateFormat(PHOTO_TIMESTAMP_FORMAT, Locale.UK).format(photoTimestamp)
+        val photoTimestampStr = SimpleDateFormat(Constants.PHOTO_TIMESTAMP_FORMAT, Locale.UK).format(photoTimestamp)
         val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(
                 "JPEG_${ photoTimestampStr}_", /* prefix */

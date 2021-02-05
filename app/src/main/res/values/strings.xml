@@ -9,4 +9,36 @@
     <string name="empty_text">      </string>
     <string name="share_button">SHARE</string>
     <string name="upload_button">UPLOAD</string>
+
+    <string name="prepare_test_device_title">Prepare device</string>
+    <string name="prepare_test_device_message">
+        <br>-Open the test strip and place it on a horizontal surface \n</br>
+        <br>-Place the extraction tube somewhere upright \n</br>
+        <br>-Place 6 drops of extraction fluid into extraction tube</br>
+    </string>
+    <string name="take_sample_title">Take your sample</string>
+    <string name="take_sample_message">
+        <br>- Open and take the swab without touching its cloth end \n</br>
+        <br>- Insert about 1.5 cm of the swab gently into one nostril \n</br>
+        <br>- Roll swab 10 times slowly along inside of the nostril \n</br>
+        <br>- Repeat insertion and roll into the other nostril</br>
+    </string>
+    <string name="process_swab_title">Process the swab</string>
+    <string name="process_swab_message">
+        <br>- Put the fabric end of the swab into the extraction tube \n</br>
+        <br>- Press swab head against the edge of tube with force \n</br>
+        <br>- Rotate swab around the tube for 10 seconds \n</br>
+        <br>- Remove swab while squeezing tube and fabric end \n</br>
+        <br>- Close and turn the tube upside down</br>
+    </string>
+    <string name="user_test_device_title">Use the test device</string>
+    <string name="user_test_device_message">
+        <br>- Squeeze 2 drops onto specimen well marked with S \n</br>
+        <br>- Press NEXT below and follow instructions</br>
+    </string>
+    <string name="next_button">NEXT</string>
+
+    <string name="stop_watch_message">Press START to initiate the stopwatch and NEXT when the phone alarm goes off</string>
+    <string name="start_button">START</string>
+    <string name="stop_watch_content">00:00:00</string>
 </resources>
