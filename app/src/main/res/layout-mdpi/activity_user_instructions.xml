@@ -25,9 +25,10 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="12dp"
+                android:fontFamily="@font/roboto"
                 android:text="@string/prepare_test_device_title"
-                android:textStyle="bold"
                 android:textSize="22sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,11 +42,12 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="12dp"
+                android:ellipsize="none"
+                android:fontFamily="@font/roboto"
+                android:scrollHorizontally="false"
+                android:singleLine="false"
                 android:text="@string/prepare_test_device_message"
                 android:textSize="16sp"
-                android:singleLine="false"
-                android:scrollHorizontally="false"
-                android:ellipsize="none"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title1" />
 
@@ -59,12 +61,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="12dp"
+                android:fontFamily="@font/roboto"
                 android:text="@string/take_sample_title"
-                android:textStyle="bold"
                 android:textSize="22sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/message1" />
+                app:layout_constraintTop_toBottomOf="@+id/message1"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/message2"
@@ -76,11 +79,12 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="12dp"
+                android:ellipsize="none"
+                android:fontFamily="@font/roboto"
+                android:scrollHorizontally="false"
+                android:singleLine="false"
                 android:text="@string/take_sample_message"
                 android:textSize="16sp"
-                android:singleLine="false"
-                android:scrollHorizontally="false"
-                android:ellipsize="none"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title2" />
 
@@ -94,12 +98,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="12dp"
+                android:fontFamily="@font/roboto"
                 android:text="@string/process_swab_title"
-                android:textStyle="bold"
                 android:textSize="22sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/message2" />
+                app:layout_constraintTop_toBottomOf="@+id/message2"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/message3"
@@ -111,11 +116,12 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="12dp"
+                android:ellipsize="none"
+                android:fontFamily="@font/roboto"
+                android:scrollHorizontally="false"
+                android:singleLine="false"
                 android:text="@string/process_swab_message"
                 android:textSize="16sp"
-                android:singleLine="false"
-                android:scrollHorizontally="false"
-                android:ellipsize="none"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title3" />
 
@@ -129,12 +135,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="12dp"
+                android:fontFamily="@font/roboto"
                 android:text="@string/user_test_device_title"
-                android:textStyle="bold"
                 android:textSize="22sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/message3" />
+                app:layout_constraintTop_toBottomOf="@+id/message3"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/message4"
@@ -146,11 +153,12 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="12dp"
+                android:ellipsize="none"
+                android:fontFamily="@font/roboto"
+                android:scrollHorizontally="false"
+                android:singleLine="false"
                 android:text="@string/user_test_device_message"
                 android:textSize="16sp"
-                android:singleLine="false"
-                android:scrollHorizontally="false"
-                android:ellipsize="none"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title4" />
 
