@@ -56,6 +56,6 @@
     <string name="user_name">Full name</string>
     <string name="user_name_entry">Joe Doe</string>
     <string name="user_contact">Email address</string>
-    <string name="user_contact_entry">Joe.Doe@youremail.com</string>
+    <string name="user_contact_entry">Joe.Doe@your.email.com</string>
     <string name="consent_button">Consent</string>
 </resources>
