@@ -239,34 +239,22 @@ class MainActivity : AppCompatActivity() {
         toast.show()
     }
 
-    /*** TEMPORARY CODE FOR TESTING
-     * For testing, you can pass one of the images stored in the 'assets' subfolder instead
-     * of sending an image that was taken with your phone. See below.
-     *
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        Log.d("onActivityResult", "1")
-        if(resultCode == Activity.RESULT_OK){
-            val res = ""+requestCode
-            Log.d("Request Code", res)
-            val res1 = ""+ CAMERA_REQUEST_CODE
-            Log.d("CAMERA_REQUEST_CODE", res1)
-            //if(requestCode == CAMERA_REQUEST_CODE){ //LS COMMENTED OUT
-            if(true){
-                Log.d("onActivityResult", "3")
-
-                val stream2 = ByteArrayOutputStream()
-                val bMap = android.graphics.BitmapFactory.decodeStream(getAssets().open("noqr_negative.jpg"))
-                theLFDImage = bMap
-                val ivImage = findViewById<AppCompatImageView>(R.id.iv_image)
-                ivImage.setImageBitmap(theLFDImage)
-
-            }
-        }
+    //Never actually called, except during testing (see pythonLFA() function below)
+    private fun setBitmapManuallyForTesting() {
+        //val stream2 = ByteArrayOutputStream()
+        val bMap = BitmapFactory.decodeStream(getAssets().open("noqr_negative.jpg"))
+        theLFDImage = bMap
+        photoTimestamp = Date()
+        //val ivImage = findViewById<AppCompatImageView>(R.id.iv_image)
+        //ivImage.setImageBitmap(theLFDImage)
     }
-     ***/
 
     private fun pythonLFA(): List<String> {
+
+        //If you're using Android Studio and the camera doesn't work, use the following
+        //function to load an image from the assets/ subfolder of in this project.
+        //setBitmapManuallyForTesting()
+
         val stream = ByteArrayOutputStream()
         if (theLFDImage != null) {
 //            theLFDImage.compress(Bitmap.CompressFormat.PNG, 90, stream)
