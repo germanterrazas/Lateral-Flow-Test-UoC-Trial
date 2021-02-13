@@ -78,7 +78,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editTextUserName"
         android:layout_width="461dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
@@ -104,10 +104,10 @@
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextUserName" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/editTextContact"
         android:layout_width="464dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
