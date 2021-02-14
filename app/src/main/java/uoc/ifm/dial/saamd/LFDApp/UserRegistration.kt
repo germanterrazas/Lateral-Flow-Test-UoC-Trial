@@ -24,26 +24,25 @@ class UserRegistration : AppCompatActivity() {
         val textViewConsent = findViewById<TextView>(R.id.textView4)
         val editTextUsername = findViewById<EditText>(R.id.editTextUserName)
         val editTextContact = findViewById<EditText>(R.id.editTextContact)
-
         textViewConsent.setMovementMethod(LinkMovementMethod.getInstance())
 
         val sharedPreference:SharedPreferences = SharedPreferences(this)
         username = sharedPreference.getValueString("USERNAME")
         consent = sharedPreference.getValueString("CONSENT_YES")
-        password = sharedPreference.getValueString("PASSWORD")
+        password = sharedPreference.getValueString("CONTACT")
 
+        // @TODO under development
         buttonConsent.setOnClickListener {
-            if(username != null && consent != null && password != null){
+            if(username.length > 0 && consent.length > 0 && password.length > 0){
                 Log.d("username if", username)
                 Log.d("password if", password)
                 Log.d("consent if", consent)
+                val startIntent = Intent(this, UserInstructions::class.java)
+                startActivity(startIntent)
             } else {
-                sharedPreference.save("USERNAME", username)
+                sharedPreference.save("USERNAME", editTextUsername.text.toString())
                 sharedPreference.save("CONSENT_YES", "YES")
-                sharedPreference.save("PASSWORD", password)
-                Log.d("username else", username)
-                Log.d("password else", password)
-                Log.d("consent else", consent)
+                sharedPreference.save("CONTACT", editTextContact.text.toString())
                 val startIntent = Intent(this, UserInstructions::class.java)
                 startActivity(startIntent)
             }

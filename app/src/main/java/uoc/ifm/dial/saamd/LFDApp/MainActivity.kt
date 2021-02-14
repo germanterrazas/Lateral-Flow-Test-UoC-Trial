@@ -87,9 +87,9 @@ class MainActivity : AppCompatActivity() {
             // Input to ZL module: theLFDImage
             // output from ZL module: successful or unsuccessful, QR code text, positive or negative
             val (processSuccess: String, testIDValue: String, resultValue: String) = pythonLFA()
-//            val processSuccess = "true"
-//            val testIDValue = "W40001231D"
-//            val resultValue = LFD_POSITIVE
+            //val processSuccess = "true"
+            //val testIDValue = "W40001231D"
+            //val resultValue = LFD_POSITIVE
             // End integration with image processing module ----------------------------------------
 
             if(processSuccess.toLowerCase(Locale.getDefault()).equals("true")){
@@ -275,6 +275,7 @@ class MainActivity : AppCompatActivity() {
         val theBMAPAsByteArray = stream2.toByteArray()
         val theBMAPAsString = android.util.Base64.encodeToString(theBMAPAsByteArray, android.util.Base64.DEFAULT)
          ***/
+ /* COMMENTED BY GT401
         val python = Python.getInstance()
         Log.d("pythonLFA1", "263")
         val pythonFile = python.getModule("pythonLFA") // <-- @LS this generates W/System: A resource failed to call close.
@@ -282,7 +283,7 @@ class MainActivity : AppCompatActivity() {
         val pythonOutput = pythonFile.callAttr("runLFA", theLFDImageAsString)
         Log.d("PRINTING PYTHON OUTPUT", pythonOutput.toString())
         Log.d("pythonLFA3", "268")
-
+*/
         //val processSuccess = true
         //val kotlinInputFromPython = pythonOutput.asList()
         // If image processing went well then set values to report
@@ -291,10 +292,11 @@ class MainActivity : AppCompatActivity() {
         //val testIDValue: String = "W40001231D"  // set QR code text
         //val parts = pythonOutput.toString().split(",:")
 
-         var resultValue = ""
+         var resultValue = "VOID" // SET TO VOID BY GT401 IT WAS ""
 
         // Right now there is also debug information returned, so I'm searching for a substring.
         // The debug information will be removed soon.
+/* COMMENTED BY GT401
          if (pythonOutput.toString().contains("positive", ignoreCase = true)) {
              resultValue = LFD_POSITIVE
          }
@@ -307,7 +309,7 @@ class MainActivity : AppCompatActivity() {
          else {
              resultValue = LFD_INVALID
          }
-
+*/
          //var resultValue: String = "Fail"
         //if (parts.size>1)
         //    resultValue = parts[0]    // set positive or negative
