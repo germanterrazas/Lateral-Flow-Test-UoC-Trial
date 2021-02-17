@@ -8,9 +8,13 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="288dp"
-        android:layout_height="31dp"
+        android:layout_width="285dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:fontFamily="@font/roboto"
         android:text="@string/options_list"
         android:textColor="@color/black"
@@ -22,8 +26,8 @@
 
     <RadioGroup
         android:id="@+id/lft_options"
-        android:layout_width="304dp"
-        android:layout_height="234dp"
+        android:layout_width="313dp"
+        android:layout_height="197dp"
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,17 +76,64 @@
             android:textSize="16dp" />
     </RadioGroup>
 
+
     <Button
         android:id="@+id/button_submit"
-        android:layout_width="match_parent"
+        android:layout_width="115dp"
         android:layout_height="60dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto"
-        android:text="@string/submit_options"
+        android:text="@string/submit_button"
         android:visibility="invisible"
         app:backgroundTint="#2196F3"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_close"
+        android:layout_width="115dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/roboto"
+        android:visibility="invisible"
+        android:text="@string/close_button"
+        app:backgroundTint="#2196F3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_photoSent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/photo_sent"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lft_options" />
+
+    <TextView
+        android:id="@+id/textView_responseSent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/response_sent"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_photoSent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

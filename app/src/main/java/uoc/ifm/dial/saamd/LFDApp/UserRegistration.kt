@@ -26,21 +26,27 @@ class UserRegistration : AppCompatActivity() {
         username = sharedPreference.getValueString("USERNAME")
         consent = sharedPreference.getValueString("CONSENT_YES")
 
+        if(username.length > 0 && consent.length > 0) {
+            Log.d("username if", username)
+            Log.d("consent if", consent)
+            val startIntent = Intent(this, MainActivity::class.java)
+            startActivity(startIntent)
+        }
+
         // @TODO under development
         buttonConsent.setOnClickListener {
-            if(username.length > 0 && consent.length > 0){
-                Log.d("username if", username)
-                Log.d("consent if", consent)
-                val startIntent = Intent(this, MainActivity::class.java)
-                startActivity(startIntent)
-            } else {
+//            if(username.length > 0 && consent.length > 0){
+//                Log.d("username if", username)
+//                Log.d("consent if", consent)
+//                val startIntent = Intent(this, MainActivity::class.java)
+//                startActivity(startIntent)
+//            } else {
 //                sharedPreference.save("USERNAME", editTextUsername.text.toString())
                 sharedPreference.save("USERNAME", "gt401")
                 sharedPreference.save("CONSENT_YES", "YES")
                 val startIntent = Intent(this, MainActivity::class.java)
                 startActivity(startIntent)
-            }
-
+//            }
         }
     }
 }

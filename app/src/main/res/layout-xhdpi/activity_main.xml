@@ -8,14 +8,13 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_image"
-        android:layout_width="250dp"
-        android:layout_height="400dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="232dp"
+        android:layout_height="325dp"
+        android:layout_marginTop="8dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
         tools:srcCompat="@tools:sample/avatars"
         tools:visibility="visible" />
 
@@ -33,7 +32,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button_process"
+        android:id="@+id/button_close"
         android:layout_width="115dp"
         android:layout_height="60dp"
         android:layout_marginEnd="24dp"
@@ -45,4 +44,24 @@
         app:backgroundTint="#2196F3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="295dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/take_picture_title"
+        android:textColor="@color/black"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val buttonCamera = findViewById<Button>(R.id.button_camera)
-        buttonProcess = findViewById<Button>(R.id.button_process)
+        buttonProcess = findViewById<Button>(R.id.button_close)
 
         // Action triggered by PROCESS button
         // Processes an LFD image and launches the dashboard activity by passing the results
