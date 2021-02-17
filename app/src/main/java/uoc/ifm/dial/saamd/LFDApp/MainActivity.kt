@@ -21,14 +21,10 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import com.chaquo.python.Python
-import com.chaquo.python.android.AndroidPlatform
 import uoc.ifm.dial.saamd.LFDApp.util.Constants
 import uoc.ifm.dial.saamd.LFDApp.util.Constants.Companion.INTENT_DATE
 import uoc.ifm.dial.saamd.LFDApp.util.Constants.Companion.INTENT_LFD_IMAGE
 import uoc.ifm.dial.saamd.LFDApp.util.Constants.Companion.INTENT_LFD_IMAGE_NAME
-import uoc.ifm.dial.saamd.LFDApp.util.Constants.Companion.INTENT_RESULT
-import uoc.ifm.dial.saamd.LFDApp.util.Constants.Companion.INTENT_TEST_ID
 import uoc.ifm.dial.saamd.LFDApp.util.Constants.Companion.INTENT_TIME
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -46,18 +42,10 @@ class MainActivity : AppCompatActivity() {
         private const val CAMERA_PERMISSION_CODE = 1
         private const val REQUEST_IMAGE_CAPTURE = 1
         private const val JPEG_COMPRESSION_FOR_EXTRA = 50
-        private const val JPEG_COMPRESSION_FOR_ANALYSIS = 20
 
         // Used to message the user through showToast()
         private const val PROCESS_BUTTON_MESSAGE = "Processing your Covid-19 LFD test"
-        private const val LFD_PROCESSING_FAILED = "Picture unavailable -- Please take another one."
         private const val CAMERA_PERMISSION_DENIED = "Permission for camera denied"
-
-        // Used in pythonLFA()
-        private const val LFD_POSITIVE = "Positive"
-        private const val LFD_NEGATIVE = "Negative"
-        private const val LFD_INVALID = "Invalid"
-        private const val NO_LFD = "No LFD Image"
 
         // Used in dispatchTakePictureIntent()
         private const val APP_URI_NAME = "uoc.ifm.dial.saamd.LFDApp"
@@ -72,10 +60,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (! Python.isStarted()) { // LS ADDED
-            Python.start(AndroidPlatform(this))
-        }
-
         val buttonCamera = findViewById<Button>(R.id.button_camera)
         val buttonProcess = findViewById<Button>(R.id.button_process)
 
@@ -83,35 +67,20 @@ class MainActivity : AppCompatActivity() {
         // Processes an LFD image and launches the dashboard activity by passing the results
         buttonProcess.setOnClickListener(View.OnClickListener {
             showToast(PROCESS_BUTTON_MESSAGE, Toast.LENGTH_LONG, Gravity.CENTER, 0, 0)
-            // Begin integration with image processing ---------------------------------------------
-            // Input to ZL module: theLFDImage
-            // output from ZL module: successful or unsuccessful, QR code text, positive or negative
-            val (processSuccess: String, testIDValue: String, resultValue: String) = pythonLFA()
-            //val processSuccess = "true"
-            //val testIDValue = "W40001231D"
-            //val resultValue = LFD_POSITIVE
-            // End integration with image processing module ----------------------------------------
 
-            if(processSuccess.toLowerCase(Locale.getDefault()).equals("true")){
+            // Prepare activity parameters using the values resulting from image processing
+            val dateValue: String = getDateInstance().format(photoTimestamp)
+            val timeValue: String = getTimeInstance().format(photoTimestamp)
+            val stream = ByteArrayOutputStream()
+            theLFDImage.compress(Bitmap.CompressFormat.JPEG, JPEG_COMPRESSION_FOR_EXTRA, stream)
 
-                // Prepare activity parameters using the values resulting from image processing
-                val dateValue: String = getDateInstance().format(photoTimestamp)
-                val timeValue: String = getTimeInstance().format(photoTimestamp)
-                val stream = ByteArrayOutputStream()
-                theLFDImage.compress(Bitmap.CompressFormat.JPEG, JPEG_COMPRESSION_FOR_EXTRA, stream)
-
-                // Set activity with parameters
-                val startIntent = Intent(this, Dashboard::class.java)
-                startIntent.putExtra(INTENT_TEST_ID, testIDValue)
-                startIntent.putExtra(INTENT_RESULT, resultValue)
-                startIntent.putExtra(INTENT_DATE, dateValue)
-                startIntent.putExtra(INTENT_TIME, timeValue)
-                startIntent.putExtra(INTENT_LFD_IMAGE_NAME, SimpleDateFormat(Constants.PHOTO_TIMESTAMP_FORMAT, Locale.UK).format(photoTimestamp))
-                startIntent.putExtra(INTENT_LFD_IMAGE, stream.toByteArray())
-                startActivity(startIntent)
-            } else{
-                showToast(LFD_PROCESSING_FAILED, Toast.LENGTH_LONG, Gravity.CENTER, 0, 0)
-            }
+            // Set activity with parameters
+            val startIntent = Intent(this, Options::class.java)
+            startIntent.putExtra(INTENT_DATE, dateValue)
+            startIntent.putExtra(INTENT_TIME, timeValue)
+            startIntent.putExtra(INTENT_LFD_IMAGE_NAME, SimpleDateFormat(Constants.PHOTO_TIMESTAMP_FORMAT, Locale.UK).format(photoTimestamp))
+            startIntent.putExtra(INTENT_LFD_IMAGE, stream.toByteArray())
+            startActivity(startIntent)
         })
 
         // Action triggered by CAMERA button
@@ -239,90 +208,4 @@ class MainActivity : AppCompatActivity() {
         toast.show()
     }
 
-    //Never actually called, except during testing (see pythonLFA() function below)
-    private fun setBitmapManuallyForTesting() {
-        //val stream2 = ByteArrayOutputStream()
-        val bMap = BitmapFactory.decodeStream(getAssets().open("noqr_negative.jpg"))
-        theLFDImage = bMap
-        photoTimestamp = Date()
-        //val ivImage = findViewById<AppCompatImageView>(R.id.iv_image)
-        //ivImage.setImageBitmap(theLFDImage)
-    }
-
-    private fun pythonLFA(): List<String> {
-
-        //If you're using Android Studio and the camera doesn't work, use the following
-        //function to load an image from the assets/ subfolder of in this project.
-        //setBitmapManuallyForTesting()
-
-        val stream = ByteArrayOutputStream()
-        if (theLFDImage != null) {
-//            theLFDImage.compress(Bitmap.CompressFormat.PNG, 90, stream)
-            // @LS if JPEG_COMPRESSION_FOR_ANALYSIS is set to 50 or over, it takes too much time and crashes
-            theLFDImage.compress(Bitmap.CompressFormat.JPEG, JPEG_COMPRESSION_FOR_ANALYSIS, stream)
-        }
-        else {
-            return listOf("false", "", "")
-        }
-        val theLFDImageAsByteArray: ByteArray = stream.toByteArray()
-        val theLFDImageAsString = android.util.Base64.encodeToString(theLFDImageAsByteArray, android.util.Base64.DEFAULT)
-
-        /***
-        val stream2 = ByteArrayOutputStream()
-        //val bMap = BitmapFactory.decodeFile("src/main/assets/image_qr_negative.png")
-        val bMap = BitmapFactory.decodeStream(getAssets().open("image_qr_negative.png"))
-        bMap.compress(Bitmap.CompressFormat.PNG, 90, stream2)
-        val theBMAPAsByteArray = stream2.toByteArray()
-        val theBMAPAsString = android.util.Base64.encodeToString(theBMAPAsByteArray, android.util.Base64.DEFAULT)
-         ***/
- /* COMMENTED BY GT401
-        val python = Python.getInstance()
-        Log.d("pythonLFA1", "263")
-        val pythonFile = python.getModule("pythonLFA") // <-- @LS this generates W/System: A resource failed to call close.
-        Log.d("pythonLFA2", "265")
-        val pythonOutput = pythonFile.callAttr("runLFA", theLFDImageAsString)
-        Log.d("PRINTING PYTHON OUTPUT", pythonOutput.toString())
-        Log.d("pythonLFA3", "268")
-*/
-        //val processSuccess = true
-        //val kotlinInputFromPython = pythonOutput.asList()
-        // If image processing went well then set values to report
-        //val processSuccess = kotlinInputFromPython[0].toBoolean()
-        //val processSuccess = true               // set true if successful or false if unsuccessful
-        //val testIDValue: String = "W40001231D"  // set QR code text
-        //val parts = pythonOutput.toString().split(",:")
-
-         var resultValue = "VOID" // SET TO VOID BY GT401 IT WAS ""
-
-        // Right now there is also debug information returned, so I'm searching for a substring.
-        // The debug information will be removed soon.
-/* COMMENTED BY GT401
-         if (pythonOutput.toString().contains("positive", ignoreCase = true)) {
-             resultValue = LFD_POSITIVE
-         }
-         else if (pythonOutput.toString().contains("negative", ignoreCase = true)) {
-             resultValue = LFD_NEGATIVE
-         }
-         else if (pythonOutput.toString().contains("fail", ignoreCase = true)) {
-             resultValue = NO_LFD
-         }
-         else {
-             resultValue = LFD_INVALID
-         }
-*/
-         //var resultValue: String = "Fail"
-        //if (parts.size>1)
-        //    resultValue = parts[0]    // set positive or negative
-        //val resultValue: String = "Negative"    // set positive or negative
-        //val testIDValue: String = kotlinInputFromPython[1].toString()  // set QR code text
-        //val resultValue: String = kotlinInputFromPython[2].toString()    // set positive or negative
-        // End integration with image processing module ----------------------------------------
-
-        //return listOf("true","W40001231D",resultValue)
-
-        // "true" parameter could probably be removed. The second parameter is the QR code.
-
-        // TODO If resultValue = NO_LFD then this should return false othewise returns true?
-        return listOf("true","W40001231D",resultValue)
-    }
 }

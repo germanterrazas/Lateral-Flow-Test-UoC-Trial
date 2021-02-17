@@ -13,9 +13,5 @@ class Constants {
         internal const val INTENT_LFD_IMAGE_NAME = "lfdImageName"
         internal const val INTENT_LFD_IMAGE = "lfdImage"
 
-        internal const val STOPWATCH_START_TIME = "stopwatchStartTime"
-        internal const val EXIT_STOPWATCH_ACTIVITY = "stopwatchEndTime"
-        internal const val STOPWATCH_VALUE = "stopwatchValue"
-
     }
 }
