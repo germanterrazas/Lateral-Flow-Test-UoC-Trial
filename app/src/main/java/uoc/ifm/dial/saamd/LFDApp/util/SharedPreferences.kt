@@ -6,7 +6,7 @@ import android.content.SharedPreferences
 class SharedPreferences (val context: Context) {
 
     private val PREFS_NAME = "LFDApp"
-    val sharedPref: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    private val sharedPref: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
     fun save(KEY_NAME: String, text: String) {
         val editor: SharedPreferences.Editor = sharedPref.edit()

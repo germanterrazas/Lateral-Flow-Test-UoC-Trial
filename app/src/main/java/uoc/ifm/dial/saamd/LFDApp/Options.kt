@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.*
@@ -13,29 +12,11 @@ import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import uoc.ifm.dial.saamd.LFDApp.util.Constants
+import uoc.ifm.dial.saamd.LFDApp.util.SharedPreferences
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 class Options : AppCompatActivity() {
-
-    companion object {
-        // For NodeJS REST API POST in Azure
-        private const val REST_API_URL = "http://52.149.154.59:3000/lfdtests"
-        private const val REST_API_IMAGE_URL = "http://52.149.154.59:3000/upload"
-        private const val CONNECT_TIMEOUT: Long = 10
-        private const val WRITE_TIMEOUT: Long = 180
-        private const val READ_TIMEOUT: Long = 180
-
-        // For use when UPLOAD button is pressed
-        private const val REQUEST_BODY_IMAGE = "image/png"
-        private const val REQUEST_BODY_JSON = "application/json; charset=utf-8"
-        private const val IMAGE_UPLOAD_FAILED = "LFD photo upload failed"
-        private const val IMAGE_UPLOAD_SUCCESSFUL = "LFD photo sent"
-        private const val RESULTS_UPLOAD_FAILED = "Results upload failed"
-        private const val CHOICE_UPLOAD_SUCCESSFUL = "Response sent"
-        private const val IMAGE_UPLOAD_WAIT = "Sending photo please wait..."
-        private const val CHOICE_UPLOAD_WAIT = "Sending response please wait..."
-    }
 
     private var postRestApiResultsSuccess: Int = -1
     private var postRestApiImageSuccess: Int = -1
@@ -84,17 +65,16 @@ class Options : AppCompatActivity() {
         buttonSubmit.setOnClickListener {
             val optionChecked = rgLFTOptions.checkedRadioButtonId
             val rbChecked = findViewById<RadioButton>(optionChecked)
-            Log.d("value", rbChecked.text.toString())
-
+            val sharedPreference = SharedPreferences(this)
             val jsonContent :String = "{\"date\": \"${dateValue}\"" +
-                    ",\"deviceid\": \"UoC-Innova\"" +
-                    ",\"result\": \"${rbChecked.text.toString()}\"" +
+                    ",\"deviceid\": \"${sharedPreference.getValueString(Constants.SHARED_PREF_DEVICE_ID)}\"" +
+                    ",\"result\": \"${rbChecked.text}\"" +
                     ",\"time\": \"${timeValue}\"}"
             postRestApiImage(theLFDImageBA, lfdImageName)
             postRestApiResults(jsonContent)
-            photoSentTextView.text = IMAGE_UPLOAD_WAIT
+            photoSentTextView.text = Constants.IMAGE_UPLOAD_WAIT
             photoSentTextView.setVisibility(View.VISIBLE)
-            responseSentTextView.text = CHOICE_UPLOAD_WAIT
+            responseSentTextView.text = Constants.CHOICE_UPLOAD_WAIT
             responseSentTextView.setVisibility(View.VISIBLE)
         }
 
@@ -108,18 +88,18 @@ class Options : AppCompatActivity() {
     private fun postRestApiImage(aBitmapBA: ByteArray, bitmapName: String){
         postRestApiImageSuccess = -1
         val okHttpClient = OkHttpClient.Builder()
-            .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
-            .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
-            .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+            .connectTimeout(Constants.CONNECT_TIMEOUT, TimeUnit.SECONDS)
+            .writeTimeout(Constants.WRITE_TIMEOUT, TimeUnit.SECONDS)
+            .readTimeout(Constants.READ_TIMEOUT, TimeUnit.SECONDS)
             .build()
         //val okHttpClient = OkHttpClient()
         val requestBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
-            .addFormDataPart("file", bitmapName,  aBitmapBA.toRequestBody(REQUEST_BODY_IMAGE.toMediaTypeOrNull()))
+            .addFormDataPart("file", bitmapName,  aBitmapBA.toRequestBody(Constants.REQUEST_BODY_IMAGE.toMediaTypeOrNull()))
             .build()
         val request = Request.Builder()
             .method("POST", requestBody)
-            .url(REST_API_IMAGE_URL)
+            .url(Constants.REST_API_IMAGE_URL)
             .build()
         val aCall : Call = okHttpClient.newCall(request)
         aCall.enqueue(object : Callback {
@@ -128,7 +108,7 @@ class Options : AppCompatActivity() {
 //                Log.d("Exception postRestApi", e.toString())
 //                Log.d("Failed", ""+postRestApiImageSuccess)
                 val context = applicationContext
-                backgroundThreadShortToast(context, IMAGE_UPLOAD_FAILED, 0, 100)
+                backgroundThreadShortToast(context, Constants.IMAGE_UPLOAD_FAILED, 0, 100)
             }
             override fun onResponse(call: Call, response: Response) {
                 postRestApiImageSuccess = response.code
@@ -145,15 +125,15 @@ class Options : AppCompatActivity() {
     private fun postRestApiResults(jsonString: String){
         postRestApiResultsSuccess = -1
         val okHttpClient = OkHttpClient.Builder()
-            .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
-            .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
-            .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+            .connectTimeout(Constants.CONNECT_TIMEOUT, TimeUnit.SECONDS)
+            .writeTimeout(Constants.WRITE_TIMEOUT, TimeUnit.SECONDS)
+            .readTimeout(Constants.READ_TIMEOUT, TimeUnit.SECONDS)
             .build()
         //val okHttpClient = OkHttpClient()
-        val requestBody = jsonString.toRequestBody(REQUEST_BODY_JSON.toMediaTypeOrNull())
+        val requestBody = jsonString.toRequestBody(Constants.REQUEST_BODY_JSON.toMediaTypeOrNull())
         val request = Request.Builder()
             .method("POST", requestBody)
-            .url(REST_API_URL)
+            .url(Constants.REST_API_URL)
             .build()
         val aCall : Call = okHttpClient.newCall(request)
         aCall.enqueue(object : Callback {
@@ -162,7 +142,7 @@ class Options : AppCompatActivity() {
 //                Log.d("Exception postRestApi", e.toString())
 //                Log.d("Failed", ""+postRestApiResultsSuccess)
                 val context = applicationContext
-                backgroundThreadShortToast(context, RESULTS_UPLOAD_FAILED, 0, 0)
+                backgroundThreadShortToast(context, Constants.RESULTS_UPLOAD_FAILED, 0, 0)
             }
             override fun onResponse(call: Call, response: Response) {
                 postRestApiResultsSuccess = response.code
@@ -179,11 +159,11 @@ class Options : AppCompatActivity() {
         if (context != null) {
             Handler(Looper.getMainLooper()).post(Runnable {
                 if(from==1) {
-                    photoSentTextView.text = IMAGE_UPLOAD_SUCCESSFUL
+                    photoSentTextView.text = Constants.IMAGE_UPLOAD_SUCCESSFUL
                     photoSent = true
                 }
                 if(from==2){
-                    responseSentTextView.text = CHOICE_UPLOAD_SUCCESSFUL
+                    responseSentTextView.text = Constants.CHOICE_UPLOAD_SUCCESSFUL
                     responseSent = true
                 }
                 if(responseSent && photoSent){

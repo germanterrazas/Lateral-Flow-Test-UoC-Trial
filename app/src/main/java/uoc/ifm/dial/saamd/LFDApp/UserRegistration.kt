@@ -7,12 +7,10 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import uoc.ifm.dial.saamd.LFDApp.util.Constants
 import uoc.ifm.dial.saamd.LFDApp.util.SharedPreferences
 
 class UserRegistration : AppCompatActivity() {
-
-    private lateinit var username: String
-    private lateinit var consent: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,31 +20,29 @@ class UserRegistration : AppCompatActivity() {
         val textViewConsent = findViewById<TextView>(R.id.textView4)
         textViewConsent.setMovementMethod(LinkMovementMethod.getInstance())
 
-        val sharedPreference:SharedPreferences = SharedPreferences(this)
-        username = sharedPreference.getValueString("USERNAME")
-        consent = sharedPreference.getValueString("CONSENT_YES")
+        val sharedPreference = SharedPreferences(this)
+        val username = sharedPreference.getValueString(Constants.SHARED_PREF_DEVICE_ID)
+        val consent = sharedPreference.getValueString(Constants.SHARED_PREF_CONSENT)
 
-        if(username.length > 0 && consent.length > 0) {
+        if(username.isNotEmpty() && consent.isNotEmpty()) {
             Log.d("username if", username)
             Log.d("consent if", consent)
             val startIntent = Intent(this, MainActivity::class.java)
             startActivity(startIntent)
         }
 
-        // @TODO under development
         buttonConsent.setOnClickListener {
-//            if(username.length > 0 && consent.length > 0){
-//                Log.d("username if", username)
-//                Log.d("consent if", consent)
-//                val startIntent = Intent(this, MainActivity::class.java)
-//                startActivity(startIntent)
-//            } else {
-//                sharedPreference.save("USERNAME", editTextUsername.text.toString())
-                sharedPreference.save("USERNAME", "gt401")
-                sharedPreference.save("CONSENT_YES", "YES")
-                val startIntent = Intent(this, MainActivity::class.java)
-                startActivity(startIntent)
-//            }
+            sharedPreference.save(Constants.SHARED_PREF_DEVICE_ID, getRandomString(Constants.SHARED_PREF_RANDOM_DEVICE_ID_LENGHT))
+            sharedPreference.save(Constants.SHARED_PREF_CONSENT, Constants.SHARED_PREF_CONSENT_VALUE)
+            val startIntent = Intent(this, MainActivity::class.java)
+            startActivity(startIntent)
         }
+    }
+
+    private fun getRandomString(length: Int) : String {
+        val charset = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+        return (1..length)
+            .map { charset.random() }
+            .joinToString("")
     }
 }

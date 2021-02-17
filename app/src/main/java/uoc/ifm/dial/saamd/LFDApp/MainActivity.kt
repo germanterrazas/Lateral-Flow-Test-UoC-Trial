@@ -44,7 +44,6 @@ class MainActivity : AppCompatActivity() {
         private const val JPEG_COMPRESSION_FOR_EXTRA = 50
 
         // Used to message the user through showToast()
-        private const val PROCESS_BUTTON_MESSAGE = "Processing your Covid-19 LFD test"
         private const val CAMERA_PERMISSION_DENIED = "Permission for camera denied"
 
         // Used in dispatchTakePictureIntent()
@@ -183,10 +182,6 @@ class MainActivity : AppCompatActivity() {
                 height.toFloat() / aPhoto.height)
         val newWidth = (ratio * aPhoto.width).roundToInt()
         val newHeight = (ratio * aPhoto.height).roundToInt()
-        Log.d("width", width.toString())
-        Log.d("height", height.toString())
-        Log.d("nWidth", newWidth.toString())
-        Log.d("nHeight", newHeight.toString())
         val thumbnail = Bitmap.createScaledBitmap(aPhoto, newWidth, newHeight, false)
         val canvas: Canvas = Canvas(Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888));
         canvas.drawBitmap(thumbnail, 0f, 0f, null);
