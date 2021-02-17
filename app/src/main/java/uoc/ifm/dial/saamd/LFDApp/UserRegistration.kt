@@ -3,7 +3,6 @@ package uoc.ifm.dial.saamd.LFDApp
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -25,8 +24,6 @@ class UserRegistration : AppCompatActivity() {
         val consent = sharedPreference.getValueString(Constants.SHARED_PREF_CONSENT)
 
         if(username.isNotEmpty() && consent.isNotEmpty()) {
-            Log.d("username if", username)
-            Log.d("consent if", consent)
             val startIntent = Intent(this, MainActivity::class.java)
             startActivity(startIntent)
         }
