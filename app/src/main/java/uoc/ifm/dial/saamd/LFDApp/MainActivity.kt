@@ -55,18 +55,18 @@ class MainActivity : AppCompatActivity() {
     private lateinit var currentPhotoPath: String
     private lateinit var photoTimestamp: Date
     private lateinit var photoURI: Uri
+    private lateinit var buttonProcess: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val buttonCamera = findViewById<Button>(R.id.button_camera)
-        val buttonProcess = findViewById<Button>(R.id.button_process)
+        buttonProcess = findViewById<Button>(R.id.button_process)
 
         // Action triggered by PROCESS button
         // Processes an LFD image and launches the dashboard activity by passing the results
         buttonProcess.setOnClickListener(View.OnClickListener {
-            showToast(PROCESS_BUTTON_MESSAGE, Toast.LENGTH_LONG, Gravity.CENTER, 0, 0)
 
             // Prepare activity parameters using the values resulting from image processing
             val dateValue: String = getDateInstance().format(photoTimestamp)
@@ -169,6 +169,7 @@ class MainActivity : AppCompatActivity() {
                 theLFDImage = BitmapFactory.decodeStream(inputStream)
                 val ivImage = findViewById<AppCompatImageView>(R.id.iv_image)
                 ivImage.setImageBitmap(createThumbnailFor(theLFDImage, ivImage.width, ivImage.height))
+                buttonProcess.setVisibility(View.VISIBLE)
         }
     }
 
