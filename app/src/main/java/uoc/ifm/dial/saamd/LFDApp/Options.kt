@@ -42,19 +42,19 @@ class Options : AppCompatActivity() {
         responseSentTextView = findViewById(R.id.textView_responseSent)
 
         rbNegativeWOS.setOnClickListener {
-            buttonSubmit.setVisibility(View.VISIBLE)
+            buttonSubmit.visibility = View.VISIBLE
         }
 
         rbPositive.setOnClickListener {
-            buttonSubmit.setVisibility(View.VISIBLE)
+            buttonSubmit.visibility = View.VISIBLE
         }
 
         rbNegativeWS.setOnClickListener {
-            buttonSubmit.setVisibility(View.VISIBLE)
+            buttonSubmit.visibility = View.VISIBLE
         }
 
         rbVoid.setOnClickListener {
-            buttonSubmit.setVisibility(View.VISIBLE)
+            buttonSubmit.visibility = View.VISIBLE
         }
 
         val dateValue = intent.getStringExtra(Constants.INTENT_DATE)
@@ -69,13 +69,15 @@ class Options : AppCompatActivity() {
             val jsonContent :String = "{\"date\": \"${dateValue}\"" +
                     ",\"deviceid\": \"${sharedPreference.getValueString(Constants.SHARED_PREF_DEVICE_ID)}\"" +
                     ",\"result\": \"${rbChecked.text}\"" +
-                    ",\"time\": \"${timeValue}\"}"
+                    ",\"time\": \"${timeValue}\"" +
+                    ",\"filename\": \"${lfdImageName}\"" +
+                    "}"
             postRestApiImage(theLFDImageBA, lfdImageName)
             postRestApiResults(jsonContent)
             photoSentTextView.text = Constants.IMAGE_UPLOAD_WAIT
-            photoSentTextView.setVisibility(View.VISIBLE)
+            photoSentTextView.visibility = View.VISIBLE
             responseSentTextView.text = Constants.CHOICE_UPLOAD_WAIT
-            responseSentTextView.setVisibility(View.VISIBLE)
+            responseSentTextView.visibility = View.VISIBLE
         }
 
         buttonClose.setOnClickListener {
@@ -167,8 +169,8 @@ class Options : AppCompatActivity() {
                     responseSent = true
                 }
                 if(responseSent && photoSent){
-                    buttonClose.setVisibility(View.VISIBLE)
-                    buttonSubmit.setVisibility(View.INVISIBLE)
+                    buttonClose.visibility = View.VISIBLE
+                    buttonSubmit.visibility = View.INVISIBLE
                 }
             })
         }

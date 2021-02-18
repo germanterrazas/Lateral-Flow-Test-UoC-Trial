@@ -17,8 +17,8 @@ class Constants {
         internal const val SHARED_PREF_CONSENT_VALUE = "YES"
 
         // For NodeJS REST API POST in Azure
-        internal const val REST_API_URL = "http://52.149.154.59:3000/lfdtests"
-        internal const val REST_API_IMAGE_URL = "http://52.149.154.59:3000/upload"
+        internal const val REST_API_URL = "https://lfd-test-trial-be.xyz/lfdtests"
+        internal const val REST_API_IMAGE_URL = "https://lfd-test-trial-be.xyz/upload"
         internal const val CONNECT_TIMEOUT: Long = 10
         internal const val WRITE_TIMEOUT: Long = 180
         internal const val READ_TIMEOUT: Long = 180

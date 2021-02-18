@@ -17,7 +17,7 @@ class UserRegistration : AppCompatActivity() {
 
         val buttonConsent = findViewById<Button>(R.id.button_consent)
         val textViewConsent = findViewById<TextView>(R.id.textView4)
-        textViewConsent.setMovementMethod(LinkMovementMethod.getInstance())
+        textViewConsent.movementMethod = LinkMovementMethod.getInstance()
 
         val sharedPreference = SharedPreferences(this)
         val username = sharedPreference.getValueString(Constants.SHARED_PREF_DEVICE_ID)
