@@ -61,7 +61,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val buttonCamera = findViewById<Button>(R.id.button_camera)
-        buttonProcess = findViewById<Button>(R.id.button_close)
+        buttonProcess = findViewById(R.id.button_close)
+        buttonProcess.isEnabled = false
+        buttonProcess.setTextColor(ContextCompat.getColor(buttonProcess.context, R.color.white))
+        buttonProcess.setBackgroundColor(ContextCompat.getColor(buttonProcess.context, R.color.disabled_button))
 
         // Action triggered by PROCESS button
         // Processes an LFD image and launches the dashboard activity by passing the results
@@ -164,11 +167,13 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_IMAGE_CAPTURE){
-                val inputStream: InputStream? = getContentResolver().openInputStream(photoURI)
+                val inputStream: InputStream? = contentResolver.openInputStream(photoURI)
                 theLFDImage = BitmapFactory.decodeStream(inputStream)
                 val ivImage = findViewById<AppCompatImageView>(R.id.iv_image)
                 ivImage.setImageBitmap(createThumbnailFor(theLFDImage, ivImage.width, ivImage.height))
-                buttonProcess.setVisibility(View.VISIBLE)
+                buttonProcess.visibility = View.VISIBLE
+                buttonProcess.isEnabled = true
+                buttonProcess.setBackgroundColor(ContextCompat.getColor(buttonProcess.context, R.color.enabled_button))
         }
     }
 
@@ -183,8 +188,8 @@ class MainActivity : AppCompatActivity() {
         val newWidth = (ratio * aPhoto.width).roundToInt()
         val newHeight = (ratio * aPhoto.height).roundToInt()
         val thumbnail = Bitmap.createScaledBitmap(aPhoto, newWidth, newHeight, false)
-        val canvas: Canvas = Canvas(Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888));
-        canvas.drawBitmap(thumbnail, 0f, 0f, null);
+        val canvas: Canvas = Canvas(Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888))
+        canvas.drawBitmap(thumbnail, 0f, 0f, null)
         return thumbnail
     }
 

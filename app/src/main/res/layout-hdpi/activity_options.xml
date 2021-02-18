@@ -10,15 +10,15 @@
         android:id="@+id/textView"
         android:layout_width="285dp"
         android:layout_height="24dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:fontFamily="@font/roboto"
         android:text="@string/options_list"
         android:textColor="@color/black"
-        android:textSize="18dp"
+        android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,8 +26,10 @@
 
     <RadioGroup
         android:id="@+id/lft_options"
-        android:layout_width="313dp"
-        android:layout_height="197dp"
+        android:layout_width="294dp"
+        android:layout_height="196dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +43,7 @@
             android:fontFamily="@font/roboto"
             android:text="@string/opt_negative_wos"
             android:textColor="@color/black"
-            android:textSize="16dp"
+            android:textSize="14dp"
             tools:layout_editor_absoluteX="82dp"
             tools:layout_editor_absoluteY="195dp" />
 
@@ -53,7 +55,7 @@
             android:fontFamily="@font/roboto"
             android:text="@string/opt_positive"
             android:textColor="@color/black"
-            android:textSize="16dp" />
+            android:textSize="14dp" />
 
         <RadioButton
             android:id="@+id/negative_ws"
@@ -63,7 +65,7 @@
             android:fontFamily="@font/roboto"
             android:text="@string/opt_negative_ws"
             android:textColor="@color/black"
-            android:textSize="16dp" />
+            android:textSize="14dp" />
 
         <RadioButton
             android:id="@+id/voids"
@@ -73,7 +75,7 @@
             android:fontFamily="@font/roboto"
             android:text="@string/opt_void"
             android:textColor="@color/black"
-            android:textSize="16dp" />
+            android:textSize="14dp" />
     </RadioGroup>
 
 
@@ -106,34 +108,34 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/textView_photoSent"
+        android:id="@+id/textView_responseSent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/roboto"
         android:text="@string/photo_sent"
         android:textColor="@color/black"
-        android:textSize="18dp"
+        android:textSize="14dp"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lft_options" />
 
     <TextView
-        android:id="@+id/textView_responseSent"
+        android:id="@+id/textView_photoSent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto"
         android:text="@string/response_sent"
         android:textColor="@color/black"
-        android:textSize="18dp"
+        android:textSize="14dp"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_photoSent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_responseSent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

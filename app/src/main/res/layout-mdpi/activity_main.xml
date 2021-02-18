@@ -10,7 +10,7 @@
         android:id="@+id/iv_image"
         android:layout_width="268dp"
         android:layout_height="491dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,8 +47,8 @@
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="427dp"
-        android:layout_height="86dp"
+        android:layout_width="422dp"
+        android:layout_height="61dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -57,7 +57,7 @@
         android:fontFamily="@font/roboto"
         android:text="@string/take_picture_title"
         android:textColor="@color/black"
-        android:textSize="32dp"
+        android:textSize="22dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.529"

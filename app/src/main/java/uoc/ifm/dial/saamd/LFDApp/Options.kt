@@ -8,6 +8,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -32,14 +33,22 @@ class Options : AppCompatActivity() {
         setContentView(R.layout.activity_options)
 
         buttonSubmit = findViewById(R.id.button_submit)
+        buttonSubmit.isEnabled = true
+        buttonSubmit.setTextColor(ContextCompat.getColor(buttonSubmit.context, R.color.white))
+        buttonSubmit.setBackgroundColor(ContextCompat.getColor(buttonSubmit.context, R.color.enabled_button))
+
         buttonClose = findViewById(R.id.button_close)
+        buttonClose.isEnabled = false
+        buttonClose.setTextColor(ContextCompat.getColor(buttonClose.context, R.color.white))
+        buttonClose.setBackgroundColor(ContextCompat.getColor(buttonClose.context, R.color.disabled_button))
+
         val rgLFTOptions = findViewById<RadioGroup>(R.id.lft_options)
         val rbNegativeWOS = findViewById<RadioButton>(R.id.negative_wos)
         val rbPositive = findViewById<RadioButton>(R.id.positive)
         val rbNegativeWS = findViewById<RadioButton>(R.id.negative_ws)
         val rbVoid = findViewById<RadioButton>(R.id.voids)
-        photoSentTextView = findViewById(R.id.textView_photoSent)
-        responseSentTextView = findViewById(R.id.textView_responseSent)
+        photoSentTextView = findViewById(R.id.textView_responseSent)
+        responseSentTextView = findViewById(R.id.textView_photoSent)
 
         rbNegativeWOS.setOnClickListener {
             buttonSubmit.visibility = View.VISIBLE
@@ -78,6 +87,9 @@ class Options : AppCompatActivity() {
             photoSentTextView.visibility = View.VISIBLE
             responseSentTextView.text = Constants.CHOICE_UPLOAD_WAIT
             responseSentTextView.visibility = View.VISIBLE
+            buttonSubmit.isEnabled = false
+            buttonSubmit.setTextColor(ContextCompat.getColor(buttonSubmit.context, R.color.white))
+            buttonSubmit.setBackgroundColor(ContextCompat.getColor(buttonSubmit.context, R.color.disabled_button))
         }
 
         buttonClose.setOnClickListener {
@@ -144,7 +156,7 @@ class Options : AppCompatActivity() {
 //                Log.d("Exception postRestApi", e.toString())
 //                Log.d("Failed", ""+postRestApiResultsSuccess)
                 val context = applicationContext
-                backgroundThreadShortToast(context, Constants.RESULTS_UPLOAD_FAILED, 0, 0)
+                backgroundThreadShortToast(context, Constants.CHOICE_UPLOAD_FAILED, 0, 0)
             }
             override fun onResponse(call: Call, response: Response) {
                 postRestApiResultsSuccess = response.code
@@ -169,8 +181,12 @@ class Options : AppCompatActivity() {
                     responseSent = true
                 }
                 if(responseSent && photoSent){
-                    buttonClose.visibility = View.VISIBLE
-                    buttonSubmit.visibility = View.INVISIBLE
+//                    buttonClose.visibility = View.VISIBLE
+//                    buttonSubmit.visibility = View.INVISIBLE
+                    buttonClose.isEnabled = true
+                    buttonClose.setTextColor(ContextCompat.getColor(buttonClose.context, R.color.white))
+                    buttonClose.setBackgroundColor(ContextCompat.getColor(buttonClose.context, R.color.enabled_button))
+
                 }
             })
         }

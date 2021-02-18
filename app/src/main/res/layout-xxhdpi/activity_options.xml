@@ -8,68 +8,70 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="348dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="368dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto"
         android:text="@string/options_list"
         android:textColor="@color/black"
-        android:textSize="22dp"
+        android:textSize="18dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
         android:id="@+id/lft_options"
-        android:layout_width="370dp"
-        android:layout_height="208dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="333dp"
+        android:layout_height="274dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <RadioButton
             android:id="@+id/negative_wos"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="67dp"
             android:checked="false"
             android:fontFamily="@font/roboto"
             android:text="@string/opt_negative_wos"
             android:textColor="@color/black"
-            android:textSize="18dp"
+            android:textSize="16dp"
             tools:layout_editor_absoluteX="82dp"
             tools:layout_editor_absoluteY="195dp" />
 
         <RadioButton
             android:id="@+id/positive"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="64dp"
             android:checked="false"
             android:fontFamily="@font/roboto"
             android:text="@string/opt_positive"
             android:textColor="@color/black"
-            android:textSize="18dp" />
+            android:textSize="16dp" />
 
         <RadioButton
             android:id="@+id/negative_ws"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:fontFamily="@font/roboto"
-            android:text="@string/opt_negative_ws"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
-
-        <RadioButton
-            android:id="@+id/voids"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="68dp"
             android:checked="false"
             android:fontFamily="@font/roboto"
             android:text="@string/opt_void"
             android:textColor="@color/black"
-            android:textSize="18dp" />
+            android:textSize="16dp" />
+
+        <RadioButton
+            android:id="@+id/voids"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:checked="false"
+            android:fontFamily="@font/roboto"
+            android:text="@string/opt_negative_ws"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
     </RadioGroup>
 
 
@@ -82,7 +84,6 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto"
         android:text="@string/submit_button"
-        android:visibility="invisible"
         app:backgroundTint="#2196F3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -95,41 +96,40 @@
         android:layout_marginRight="24dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto"
-        android:visibility="invisible"
         android:text="@string/close_button"
         app:backgroundTint="#2196F3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/textView_photoSent"
+        android:id="@+id/textView_responseSent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="62dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/roboto"
         android:text="@string/photo_sent"
         android:textColor="@color/black"
-        android:textSize="24dp"
+        android:textSize="16dp"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lft_options" />
 
     <TextView
-        android:id="@+id/textView_responseSent"
+        android:id="@+id/textView_photoSent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/roboto"
         android:text="@string/response_sent"
         android:textColor="@color/black"
-        android:textSize="24dp"
+        android:textSize="16dp"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_photoSent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_responseSent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
