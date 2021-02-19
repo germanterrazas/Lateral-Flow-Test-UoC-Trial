@@ -53,7 +53,7 @@
             android:textSize="16dp" />
 
         <RadioButton
-            android:id="@+id/negative_ws"
+            android:id="@+id/voids"
             android:layout_width="match_parent"
             android:layout_height="68dp"
             android:checked="false"
@@ -63,7 +63,7 @@
             android:textSize="16dp" />
 
         <RadioButton
-            android:id="@+id/voids"
+            android:id="@+id/negative_ws"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:checked="false"

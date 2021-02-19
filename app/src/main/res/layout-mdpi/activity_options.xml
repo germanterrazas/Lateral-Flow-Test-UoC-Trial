@@ -56,22 +56,22 @@
             android:textSize="20dp" />
 
         <RadioButton
-            android:id="@+id/negative_ws"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:fontFamily="@font/roboto"
-            android:text="@string/opt_negative_ws"
-            android:textColor="@color/black"
-            android:textSize="20dp" />
-
-        <RadioButton
             android:id="@+id/voids"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="false"
             android:fontFamily="@font/roboto"
             android:text="@string/opt_void"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <RadioButton
+            android:id="@+id/negative_ws"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:fontFamily="@font/roboto"
+            android:text="@string/opt_negative_ws"
             android:textColor="@color/black"
             android:textSize="20dp" />
     </RadioGroup>

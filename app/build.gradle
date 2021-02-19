@@ -26,8 +26,9 @@ android {
             }
         }
         python {
-            buildPython "/usr/local/bin/python3"
-            buildPython "python3"
+//            buildPython "/usr/local/bin/python3"
+            buildPython "C:\\Users\\German Terrazas\\AppData\\Local\\Programs\\Python\\Python38\\python.exe"
+            buildPython "python"
             pip {
                 // A pip requirement specifier, with or without a version number:
                 //install "opencv-python"
@@ -75,6 +76,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
