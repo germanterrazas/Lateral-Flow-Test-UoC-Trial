@@ -13,6 +13,7 @@
 
 
     <string name="next_button">NEXT</string>
+    <string name="start_button">START</string>
 
     <string name="registration_title">Consent Request</string>
     <string name="label_on_data">All the data that you upload via this app will be anonymised.</string>

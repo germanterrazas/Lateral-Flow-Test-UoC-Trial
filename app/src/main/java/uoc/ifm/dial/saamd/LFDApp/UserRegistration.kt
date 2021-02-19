@@ -19,16 +19,8 @@ class UserRegistration : AppCompatActivity() {
         val textViewConsent = findViewById<TextView>(R.id.textView4)
         textViewConsent.movementMethod = LinkMovementMethod.getInstance()
 
-        val sharedPreference = SharedPreferences(this)
-        val username = sharedPreference.getValueString(Constants.SHARED_PREF_DEVICE_ID)
-        val consent = sharedPreference.getValueString(Constants.SHARED_PREF_CONSENT)
-
-        if(username.isNotEmpty() && consent.isNotEmpty()) {
-            val startIntent = Intent(this, MainActivity::class.java)
-            startActivity(startIntent)
-        }
-
         buttonConsent.setOnClickListener {
+            val sharedPreference = SharedPreferences(this)
             sharedPreference.save(Constants.SHARED_PREF_DEVICE_ID, getRandomString(Constants.SHARED_PREF_RANDOM_DEVICE_ID_LENGHT))
             sharedPreference.save(Constants.SHARED_PREF_CONSENT, Constants.SHARED_PREF_CONSENT_VALUE)
             val startIntent = Intent(this, MainActivity::class.java)
