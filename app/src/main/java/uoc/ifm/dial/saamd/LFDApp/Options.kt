@@ -69,9 +69,9 @@ class Options : AppCompatActivity() {
         val photoURI = Uri.parse(theLFDImageURI)
         val lfdImageName: String = intent.getStringExtra(Constants.INTENT_LFD_IMAGE_NAME)+".jpeg"
         val stream = ByteArrayOutputStream()
+        var jsonContent = ""
 
         buttonSubmit.setOnClickListener {
-            var jsonContent = ""
             if (postRestApiResultsSuccess != Constants.SUCCESS_API_POST_CODE && postRestApiImageSuccess != Constants.SUCCESS_API_POST_CODE){
                 val optionChecked = rgLFTOptions.checkedRadioButtonId
                 val rbChecked = findViewById<RadioButton>(optionChecked)
@@ -217,21 +217,5 @@ class Options : AppCompatActivity() {
         aButton.setTextColor(ContextCompat.getColor(aButton.context, R.color.white))
         aButton.setBackgroundColor(ContextCompat.getColor(aButton.context, R.color.disabled_button))
     }
-
-//
-//    // Sets and shows a Toast message to the user
-//    // message: the string to show
-//    // xOffset: the offset on container x-axis
-//    // yOffset: the offset on container y-axis
-//    private fun backgroundThreadShortToast(context: Context?,
-//                                           message: String?, xOffSet: Int, yOffSet: Int) {
-//        if (context != null && message != null) {
-//            Handler(Looper.getMainLooper()).post(Runnable {
-//                val toast : Toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
-//                toast.setGravity(Gravity.CENTER, xOffSet, yOffSet)
-//                toast.show()
-//            })
-//        }
-//    }
 
 }
