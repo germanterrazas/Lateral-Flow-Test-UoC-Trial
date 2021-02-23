@@ -22,14 +22,15 @@ class Constants {
         internal const val CONNECT_TIMEOUT: Long = 10
         internal const val WRITE_TIMEOUT: Long = 180
         internal const val READ_TIMEOUT: Long = 180
+        internal const val SUCCESS_API_POST_CODE: Int = 200
 
         // For use when UPLOAD button is pressed
         internal const val REQUEST_BODY_IMAGE = "image/png"
         internal const val REQUEST_BODY_JSON = "application/json; charset=utf-8"
         internal const val IMAGE_UPLOAD_WAIT = "Sending device photo please wait..."
         internal const val CHOICE_UPLOAD_WAIT = "Sending response please wait..."
-        internal const val IMAGE_UPLOAD_FAILED = "Device photo unable to be sent"
-        internal const val CHOICE_UPLOAD_FAILED = "Response unable to be sent"
+        internal const val IMAGE_UPLOAD_FAILED = "Device photo unable to be sent - try again"
+        internal const val CHOICE_UPLOAD_FAILED = "Response unable to be sent - try again"
         internal const val IMAGE_UPLOAD_SUCCESSFUL = "Device photo sent."
         internal const val CHOICE_UPLOAD_SUCCESSFUL = "Response sent."
     }

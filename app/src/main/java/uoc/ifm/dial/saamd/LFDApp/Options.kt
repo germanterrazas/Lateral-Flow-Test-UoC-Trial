@@ -1,12 +1,17 @@
 package uoc.ifm.dial.saamd.LFDApp
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.Gravity
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import okhttp3.*
@@ -14,7 +19,9 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import uoc.ifm.dial.saamd.LFDApp.util.Constants
 import uoc.ifm.dial.saamd.LFDApp.util.SharedPreferences
+import java.io.ByteArrayOutputStream
 import java.io.IOException
+import java.io.InputStream
 import java.util.concurrent.TimeUnit
 
 class Options : AppCompatActivity() {
@@ -33,15 +40,9 @@ class Options : AppCompatActivity() {
         setContentView(R.layout.activity_options)
 
         buttonSubmit = findViewById(R.id.button_submit)
-        buttonSubmit.isEnabled = true
-        buttonSubmit.setTextColor(ContextCompat.getColor(buttonSubmit.context, R.color.white))
-        buttonSubmit.setBackgroundColor(ContextCompat.getColor(buttonSubmit.context, R.color.enabled_button))
-
+        disableButton(buttonSubmit)
         buttonClose = findViewById(R.id.button_close)
-        buttonClose.isEnabled = false
-        buttonClose.setTextColor(ContextCompat.getColor(buttonClose.context, R.color.white))
-        buttonClose.setBackgroundColor(ContextCompat.getColor(buttonClose.context, R.color.disabled_button))
-
+        disableButton(buttonClose)
         val rgLFTOptions = findViewById<RadioGroup>(R.id.lft_options)
         val rbNegativeWOS = findViewById<RadioButton>(R.id.negative_wos)
         val rbPositive = findViewById<RadioButton>(R.id.positive)
@@ -51,45 +52,65 @@ class Options : AppCompatActivity() {
         responseSentTextView = findViewById(R.id.textView_photoSent)
 
         rbNegativeWOS.setOnClickListener {
-            buttonSubmit.visibility = View.VISIBLE
+            enableButton(buttonSubmit)
         }
-
         rbPositive.setOnClickListener {
-            buttonSubmit.visibility = View.VISIBLE
+            enableButton(buttonSubmit)
         }
-
         rbNegativeWS.setOnClickListener {
-            buttonSubmit.visibility = View.VISIBLE
+            enableButton(buttonSubmit)
         }
-
         rbVoid.setOnClickListener {
-            buttonSubmit.visibility = View.VISIBLE
+            enableButton(buttonSubmit)
         }
-
         val dateValue = intent.getStringExtra(Constants.INTENT_DATE)
         val timeValue = intent.getStringExtra(Constants.INTENT_TIME)
-        val theLFDImageBA: ByteArray = intent.getByteArrayExtra(Constants.INTENT_LFD_IMAGE)!!
+        val theLFDImageURI = intent.getStringExtra(Constants.INTENT_LFD_IMAGE)
+        val photoURI = Uri.parse(theLFDImageURI)
         val lfdImageName: String = intent.getStringExtra(Constants.INTENT_LFD_IMAGE_NAME)+".jpeg"
+        val stream = ByteArrayOutputStream()
 
         buttonSubmit.setOnClickListener {
-            val optionChecked = rgLFTOptions.checkedRadioButtonId
-            val rbChecked = findViewById<RadioButton>(optionChecked)
-            val sharedPreference = SharedPreferences(this)
-            val jsonContent :String = "{\"date\": \"${dateValue}\"" +
-                    ",\"deviceid\": \"${sharedPreference.getValueString(Constants.SHARED_PREF_DEVICE_ID)}\"" +
-                    ",\"result\": \"${rbChecked.text}\"" +
-                    ",\"time\": \"${timeValue}\"" +
-                    ",\"filename\": \"${lfdImageName}\"" +
-                    "}"
-            postRestApiImage(theLFDImageBA, lfdImageName)
-            postRestApiResults(jsonContent)
-            photoSentTextView.text = Constants.IMAGE_UPLOAD_WAIT
-            photoSentTextView.visibility = View.VISIBLE
-            responseSentTextView.text = Constants.CHOICE_UPLOAD_WAIT
-            responseSentTextView.visibility = View.VISIBLE
-            buttonSubmit.isEnabled = false
-            buttonSubmit.setTextColor(ContextCompat.getColor(buttonSubmit.context, R.color.white))
-            buttonSubmit.setBackgroundColor(ContextCompat.getColor(buttonSubmit.context, R.color.disabled_button))
+            var jsonContent = ""
+            if (postRestApiResultsSuccess != Constants.SUCCESS_API_POST_CODE && postRestApiImageSuccess != Constants.SUCCESS_API_POST_CODE){
+                val optionChecked = rgLFTOptions.checkedRadioButtonId
+                val rbChecked = findViewById<RadioButton>(optionChecked)
+                rbNegativeWOS.isEnabled = false
+                rbPositive.isEnabled = false
+                rbVoid.isEnabled = false
+                rbNegativeWS.isEnabled = false
+                val sharedPreference = SharedPreferences(this)
+                jsonContent = "{\"date\": \"${dateValue}\"" +
+                        ",\"deviceid\": \"${sharedPreference.getValueString(Constants.SHARED_PREF_DEVICE_ID)}\"" +
+                        ",\"result\": \"${rbChecked.text}\"" +
+                        ",\"time\": \"${timeValue}\"" +
+                        ",\"filename\": \"${lfdImageName}\"" +
+                        "}"
+
+                // Access the image in folder content://uoc.ifm.dial.saamd.LFDApp/my_images/
+                val inputStream: InputStream? = contentResolver.openInputStream(photoURI)
+                val theLFDImage = BitmapFactory.decodeStream(inputStream)
+                theLFDImage.compress(Bitmap.CompressFormat.JPEG, MainActivity.JPEG_COMPRESSION_FOR_EXTRA, stream)
+                postRestApiImage(stream.toByteArray(), lfdImageName)
+                postRestApiResults(jsonContent)
+                photoSentTextView.text = Constants.IMAGE_UPLOAD_WAIT
+                photoSentTextView.visibility = View.VISIBLE
+                responseSentTextView.text = Constants.CHOICE_UPLOAD_WAIT
+                responseSentTextView.visibility = View.VISIBLE
+                disableButton(buttonSubmit)
+            }  else {
+                if (postRestApiResultsSuccess != Constants.SUCCESS_API_POST_CODE){
+                    postRestApiResults(jsonContent)
+                    responseSentTextView.text = Constants.CHOICE_UPLOAD_WAIT
+                    disableButton(buttonSubmit)
+                }
+                if(postRestApiImageSuccess != Constants.SUCCESS_API_POST_CODE){
+                    postRestApiImage(stream.toByteArray(), lfdImageName)
+                    photoSentTextView.text = Constants.IMAGE_UPLOAD_WAIT
+                    disableButton(buttonSubmit)
+                }
+            }
+
         }
 
         buttonClose.setOnClickListener {
@@ -109,7 +130,7 @@ class Options : AppCompatActivity() {
         //val okHttpClient = OkHttpClient()
         val requestBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
-            .addFormDataPart("file", bitmapName,  aBitmapBA.toRequestBody(Constants.REQUEST_BODY_IMAGE.toMediaTypeOrNull()))
+            .addFormDataPart("file", bitmapName, aBitmapBA.toRequestBody(Constants.REQUEST_BODY_IMAGE.toMediaTypeOrNull()))
             .build()
         val request = Request.Builder()
             .method("POST", requestBody)
@@ -119,18 +140,11 @@ class Options : AppCompatActivity() {
         aCall.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 postRestApiImageSuccess = 0
-//                Log.d("Exception postRestApi", e.toString())
-//                Log.d("Failed", ""+postRestApiImageSuccess)
-                val context = applicationContext
-                backgroundThreadShortToast(context, Constants.IMAGE_UPLOAD_FAILED, 0, 100)
+                backgroundThreadDataSent(applicationContext,1, postRestApiImageSuccess)
             }
             override fun onResponse(call: Call, response: Response) {
                 postRestApiImageSuccess = response.code
-//                Log.d("Response body", response.body.toString())
-//                Log.d("Success", ""+postRestApiImageSuccess)
-                val context = applicationContext
-//                backgroundThreadShortToast(context, IMAGE_UPLOAD_SUCCESSFUL, 0, 100)
-                backgroundThreadDataSent(context,1)
+                backgroundThreadDataSent(applicationContext,1, postRestApiImageSuccess)
             }
         })
     }
@@ -153,58 +167,71 @@ class Options : AppCompatActivity() {
         aCall.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 postRestApiResultsSuccess = 0
-//                Log.d("Exception postRestApi", e.toString())
-//                Log.d("Failed", ""+postRestApiResultsSuccess)
-                val context = applicationContext
-                backgroundThreadShortToast(context, Constants.CHOICE_UPLOAD_FAILED, 0, 0)
+                backgroundThreadDataSent(applicationContext,2, postRestApiResultsSuccess)
             }
             override fun onResponse(call: Call, response: Response) {
                 postRestApiResultsSuccess = response.code
-//                Log.d("Response body", response.body.toString())
-//                Log.d("Success", ""+postRestApiResultsSuccess)
-                val context = applicationContext
-//                backgroundThreadShortToast(context, RESULTS_UPLOAD_SUCCESSFUL, 0, 0)
-                backgroundThreadDataSent(context,2)
+                backgroundThreadDataSent(applicationContext,2, postRestApiResultsSuccess)
             }
         })
     }
 
-    private fun backgroundThreadDataSent(context: Context?,from: Int) {
+    private fun backgroundThreadDataSent(context: Context?,from: Int, resultSuccess: Int) {
         if (context != null) {
             Handler(Looper.getMainLooper()).post(Runnable {
-                if(from==1) {
-                    photoSentTextView.text = Constants.IMAGE_UPLOAD_SUCCESSFUL
-                    photoSent = true
+                if(from == 1) {
+                    if(resultSuccess == Constants.SUCCESS_API_POST_CODE){
+                        photoSentTextView.text = Constants.IMAGE_UPLOAD_SUCCESSFUL
+                        photoSent = true
+                    } else {
+                        photoSentTextView.text = Constants.IMAGE_UPLOAD_FAILED
+                    }
                 }
-                if(from==2){
-                    responseSentTextView.text = Constants.CHOICE_UPLOAD_SUCCESSFUL
-                    responseSent = true
+                if(from == 2){
+                    if(resultSuccess == Constants.SUCCESS_API_POST_CODE){
+                        responseSentTextView.text = Constants.CHOICE_UPLOAD_SUCCESSFUL
+                        responseSent = true
+                    } else {
+                        responseSentTextView.text = Constants.CHOICE_UPLOAD_FAILED
+                    }
                 }
                 if(responseSent && photoSent){
-//                    buttonClose.visibility = View.VISIBLE
-//                    buttonSubmit.visibility = View.INVISIBLE
-                    buttonClose.isEnabled = true
-                    buttonClose.setTextColor(ContextCompat.getColor(buttonClose.context, R.color.white))
-                    buttonClose.setBackgroundColor(ContextCompat.getColor(buttonClose.context, R.color.enabled_button))
-
+                    enableButton(buttonClose)
+                } else {
+                    if((postRestApiResultsSuccess > -1) && (postRestApiImageSuccess > -1)){
+                        enableButton(buttonSubmit)
+                    }
                 }
             })
         }
     }
 
-    // Sets and shows a Toast message to the user
-    // message: the string to show
-    // xOffset: the offset on container x-axis
-    // yOffset: the offset on container y-axis
-    private fun backgroundThreadShortToast(context: Context?,
-                                           message: String?, xOffSet: Int, yOffSet: Int) {
-        if (context != null && message != null) {
-            Handler(Looper.getMainLooper()).post(Runnable {
-                val toast : Toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
-                toast.setGravity(Gravity.CENTER, xOffSet, yOffSet)
-                toast.show()
-            })
-        }
+    private fun enableButton(aButton: Button){
+        aButton.isEnabled = true
+        aButton.setTextColor(ContextCompat.getColor(aButton.context, R.color.white))
+        aButton.setBackgroundColor(ContextCompat.getColor(aButton.context, R.color.enabled_button))
     }
+
+    private fun disableButton(aButton: Button){
+        aButton.isEnabled = false
+        aButton.setTextColor(ContextCompat.getColor(aButton.context, R.color.white))
+        aButton.setBackgroundColor(ContextCompat.getColor(aButton.context, R.color.disabled_button))
+    }
+
+//
+//    // Sets and shows a Toast message to the user
+//    // message: the string to show
+//    // xOffset: the offset on container x-axis
+//    // yOffset: the offset on container y-axis
+//    private fun backgroundThreadShortToast(context: Context?,
+//                                           message: String?, xOffSet: Int, yOffSet: Int) {
+//        if (context != null && message != null) {
+//            Handler(Looper.getMainLooper()).post(Runnable {
+//                val toast : Toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
+//                toast.setGravity(Gravity.CENTER, xOffSet, yOffSet)
+//                toast.show()
+//            })
+//        }
+//    }
 
 }

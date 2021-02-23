@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val CAMERA_PERMISSION_CODE = 1
         private const val REQUEST_IMAGE_CAPTURE = 1
-        private const val JPEG_COMPRESSION_FOR_EXTRA = 50
+        internal const val JPEG_COMPRESSION_FOR_EXTRA = 50
 
         // Used to message the user through showToast()
         private const val CAMERA_PERMISSION_DENIED = "Permission for camera denied"
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         private const val APP_URI_NAME = "uoc.ifm.dial.saamd.LFDApp"
     }
 
-    private lateinit var theLFDImage: Bitmap
+//    private lateinit var theLFDImage: Bitmap
     private lateinit var currentPhotoPath: String
     private lateinit var photoTimestamp: Date
     private lateinit var photoURI: Uri
@@ -69,19 +69,15 @@ class MainActivity : AppCompatActivity() {
         // Action triggered by PROCESS button
         // Processes an LFD image and launches the dashboard activity by passing the results
         buttonProcess.setOnClickListener(View.OnClickListener {
-
             // Prepare activity parameters using the values resulting from image processing
             val dateValue: String = getDateInstance().format(photoTimestamp)
             val timeValue: String = getTimeInstance().format(photoTimestamp)
-            val stream = ByteArrayOutputStream()
-            theLFDImage.compress(Bitmap.CompressFormat.JPEG, JPEG_COMPRESSION_FOR_EXTRA, stream)
-
             // Set activity with parameters
             val startIntent = Intent(this, Options::class.java)
             startIntent.putExtra(INTENT_DATE, dateValue)
             startIntent.putExtra(INTENT_TIME, timeValue)
             startIntent.putExtra(INTENT_LFD_IMAGE_NAME, SimpleDateFormat(Constants.PHOTO_TIMESTAMP_FORMAT, Locale.UK).format(photoTimestamp))
-            startIntent.putExtra(INTENT_LFD_IMAGE, stream.toByteArray())
+            startIntent.putExtra(INTENT_LFD_IMAGE, photoURI.toString())
             startActivity(startIntent)
         })
 
@@ -94,14 +90,15 @@ class MainActivity : AppCompatActivity() {
                 ) == PackageManager.PERMISSION_GRANTED
                 ){
                     dispatchTakePictureIntent()
-                }else{
+                } else {
                     ActivityCompat.requestPermissions(
                         this,
                         arrayOf(Manifest.permission.CAMERA),
                         CAMERA_PERMISSION_CODE
                     )
-            }
+                }
         }
+
     }
 
     // The device requests the user permission to use the camera
@@ -146,8 +143,8 @@ class MainActivity : AppCompatActivity() {
                 val photoFile: File? = try {
                     createImageFile()
                 } catch (ex: IOException) {
-                    // Error occurred while creating the File
-                    null
+                    Log.d("Error line 153", ex.printStackTrace().toString())
+                    throw RuntimeException(ex)
                 }
                 // Continue only if the File was successfully created
                 photoFile?.also {
@@ -156,6 +153,7 @@ class MainActivity : AppCompatActivity() {
                             APP_URI_NAME,
                             it
                     )
+                    Log.d("path", photoURI.toString())
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
                 }
@@ -168,7 +166,7 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_IMAGE_CAPTURE){
                 val inputStream: InputStream? = contentResolver.openInputStream(photoURI)
-                theLFDImage = BitmapFactory.decodeStream(inputStream)
+                val theLFDImage = BitmapFactory.decodeStream(inputStream)
                 val ivImage = findViewById<AppCompatImageView>(R.id.iv_image)
                 ivImage.setImageBitmap(createThumbnailFor(theLFDImage, ivImage.width, ivImage.height))
                 buttonProcess.visibility = View.VISIBLE
@@ -188,7 +186,7 @@ class MainActivity : AppCompatActivity() {
         val newWidth = (ratio * aPhoto.width).roundToInt()
         val newHeight = (ratio * aPhoto.height).roundToInt()
         val thumbnail = Bitmap.createScaledBitmap(aPhoto, newWidth, newHeight, false)
-        val canvas: Canvas = Canvas(Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888))
+        val canvas = Canvas(Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888))
         canvas.drawBitmap(thumbnail, 0f, 0f, null)
         return thumbnail
     }
