@@ -26,7 +26,6 @@ import uoc.ifm.dial.saamd.LFDApp.util.Constants.Companion.INTENT_DATE
 import uoc.ifm.dial.saamd.LFDApp.util.Constants.Companion.INTENT_LFD_IMAGE
 import uoc.ifm.dial.saamd.LFDApp.util.Constants.Companion.INTENT_LFD_IMAGE_NAME
 import uoc.ifm.dial.saamd.LFDApp.util.Constants.Companion.INTENT_TIME
-import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
 import java.io.InputStream
