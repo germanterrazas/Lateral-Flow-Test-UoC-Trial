@@ -28,7 +28,8 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto"
         android:text="@string/cam_button"
-        app:backgroundTint="#2196F3"
+        android:textSize="18sp"
+        app:backgroundTint="#009688"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -40,9 +41,9 @@
         android:layout_marginRight="24dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto"
-        android:visibility="invisible"
         android:text="@string/process_button"
-        app:backgroundTint="#2196F3"
+        android:textSize="18sp"
+        app:backgroundTint="#A8AAAC"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -58,7 +59,7 @@
         android:fontFamily="@font/roboto"
         android:text="@string/take_picture_title"
         android:textColor="@color/black"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

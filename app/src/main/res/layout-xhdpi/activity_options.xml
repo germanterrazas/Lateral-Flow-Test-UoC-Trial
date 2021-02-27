@@ -16,15 +16,15 @@
         android:fontFamily="@font/roboto"
         android:text="@string/options_list"
         android:textColor="@color/black"
-        android:textSize="16dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
         android:id="@+id/lft_options"
-        android:layout_width="332dp"
-        android:layout_height="199dp"
+        android:layout_width="329dp"
+        android:layout_height="249dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
@@ -35,44 +35,44 @@
         <RadioButton
             android:id="@+id/negative_wos"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:checked="false"
             android:fontFamily="@font/roboto"
             android:text="@string/opt_negative_wos"
             android:textColor="@color/black"
-            android:textSize="14dp"
+            android:textSize="18sp"
             tools:layout_editor_absoluteX="82dp"
             tools:layout_editor_absoluteY="195dp" />
 
         <RadioButton
             android:id="@+id/positive"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="63dp"
             android:checked="false"
             android:fontFamily="@font/roboto"
             android:text="@string/opt_positive"
             android:textColor="@color/black"
-            android:textSize="14dp" />
+            android:textSize="18sp" />
 
         <RadioButton
             android:id="@+id/voids"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="61dp"
             android:checked="false"
             android:fontFamily="@font/roboto"
             android:text="@string/opt_void"
             android:textColor="@color/black"
-            android:textSize="14dp" />
+            android:textSize="18sp" />
 
         <RadioButton
             android:id="@+id/negative_ws"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="59dp"
             android:checked="false"
             android:fontFamily="@font/roboto"
             android:text="@string/opt_negative_ws"
             android:textColor="@color/black"
-            android:textSize="14dp" />
+            android:textSize="18sp" />
     </RadioGroup>
 
     <Button
@@ -84,8 +84,8 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto"
         android:text="@string/submit_button"
-        android:visibility="invisible"
-        app:backgroundTint="#2196F3"
+        android:textSize="18sp"
+        app:backgroundTint="#009688"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -97,9 +97,9 @@
         android:layout_marginRight="24dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto"
-        android:visibility="invisible"
         android:text="@string/close_button"
-        app:backgroundTint="#2196F3"
+        android:textSize="18sp"
+        app:backgroundTint="#009688"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -113,7 +113,7 @@
         android:fontFamily="@font/roboto"
         android:text="@string/photo_sent"
         android:textColor="@color/black"
-        android:textSize="14dp"
+        android:textSize="18sp"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lft_options" />
@@ -128,7 +128,7 @@
         android:fontFamily="@font/roboto"
         android:text="@string/response_sent"
         android:textColor="@color/black"
-        android:textSize="14dp"
+        android:textSize="18sp"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_responseSent" />

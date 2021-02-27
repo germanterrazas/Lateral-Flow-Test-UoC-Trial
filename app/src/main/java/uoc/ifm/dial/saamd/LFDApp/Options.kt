@@ -67,7 +67,7 @@ class Options : AppCompatActivity() {
         val timeValue = intent.getStringExtra(Constants.INTENT_TIME)
         val theLFDImageURI = intent.getStringExtra(Constants.INTENT_LFD_IMAGE)
         val photoURI = Uri.parse(theLFDImageURI)
-        val lfdImageName: String = intent.getStringExtra(Constants.INTENT_LFD_IMAGE_NAME)+".jpeg"
+        val lfdImageName: String = intent.getStringExtra(Constants.INTENT_LFD_IMAGE_NAME)+Constants.IMAGE_FILE_EXTENSION
         val stream = ByteArrayOutputStream()
         var jsonContent = ""
 
@@ -90,7 +90,7 @@ class Options : AppCompatActivity() {
                 // Access the image in folder content://uoc.ifm.dial.saamd.LFDApp/my_images/
                 val inputStream: InputStream? = contentResolver.openInputStream(photoURI)
                 val theLFDImage = BitmapFactory.decodeStream(inputStream)
-                theLFDImage.compress(Bitmap.CompressFormat.JPEG, MainActivity.JPEG_COMPRESSION_FOR_EXTRA, stream)
+                theLFDImage.compress(Bitmap.CompressFormat.JPEG, Constants.JPEG_COMPRESSION_FOR_EXTRA, stream)
                 postRestApiImage(stream.toByteArray(), lfdImageName)
                 postRestApiResults(jsonContent)
                 photoSentTextView.text = Constants.IMAGE_UPLOAD_WAIT
@@ -133,7 +133,7 @@ class Options : AppCompatActivity() {
             .addFormDataPart("file", bitmapName, aBitmapBA.toRequestBody(Constants.REQUEST_BODY_IMAGE.toMediaTypeOrNull()))
             .build()
         val request = Request.Builder()
-            .method("POST", requestBody)
+            .method(Constants.API_POST_METHOD, requestBody)
             .url(Constants.REST_API_IMAGE_URL)
             .build()
         val aCall : Call = okHttpClient.newCall(request)
@@ -160,7 +160,7 @@ class Options : AppCompatActivity() {
         //val okHttpClient = OkHttpClient()
         val requestBody = jsonString.toRequestBody(Constants.REQUEST_BODY_JSON.toMediaTypeOrNull())
         val request = Request.Builder()
-            .method("POST", requestBody)
+            .method(Constants.API_POST_METHOD, requestBody)
             .url(Constants.REST_API_URL)
             .build()
         val aCall : Call = okHttpClient.newCall(request)

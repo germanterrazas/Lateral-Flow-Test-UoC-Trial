@@ -10,11 +10,11 @@
         android:id="@+id/textView"
         android:layout_width="353dp"
         android:layout_height="47dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto"
         android:text="@string/options_list"
         android:textColor="@color/black"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,7 @@
         <RadioButton
             android:id="@+id/negative_wos"
             android:layout_width="match_parent"
-            android:layout_height="61dp"
+            android:layout_height="70dp"
             android:checked="false"
             android:fontFamily="@font/roboto"
             android:text="@string/opt_negative_wos"
@@ -42,30 +42,30 @@
             tools:layout_editor_absoluteY="195dp" />
 
         <RadioButton
-            android:checked="false"
             android:id="@+id/positive"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="67dp"
+            android:checked="false"
             android:fontFamily="@font/roboto"
             android:text="@string/opt_positive"
             android:textColor="@color/black"
             android:textSize="24sp" />
 
         <RadioButton
-            android:checked="false"
             android:id="@+id/voids"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
+            android:checked="false"
             android:fontFamily="@font/roboto"
             android:text="@string/opt_void"
             android:textColor="@color/black"
             android:textSize="24sp" />
 
         <RadioButton
-            android:checked="false"
             android:id="@+id/negative_ws"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="86dp"
+            android:checked="false"
             android:fontFamily="@font/roboto"
             android:text="@string/opt_negative_ws"
             android:textColor="@color/black"
@@ -82,8 +82,8 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto"
         android:text="@string/submit_button"
-        android:visibility="invisible"
-        app:backgroundTint="#2196F3"
+        android:textSize="18sp"
+        app:backgroundTint="#009688"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -95,9 +95,9 @@
         android:layout_marginRight="24dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto"
-        android:visibility="invisible"
         android:text="@string/close_button"
-        app:backgroundTint="#2196F3"
+        android:textSize="18sp"
+        app:backgroundTint="#009688"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -107,12 +107,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="64dp"
         android:fontFamily="@font/roboto"
-        android:visibility="invisible"
         android:text="@string/photo_sent"
         android:textColor="@color/black"
-        android:textSize="18dp"
+        android:textSize="18sp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lft_options" />
 
@@ -127,7 +127,7 @@
         android:text="@string/response_sent"
         android:visibility="invisible"
         android:textColor="@color/black"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_responseSent" />
 

@@ -18,7 +18,7 @@
         android:fontFamily="@font/roboto"
         android:text="@string/options_list"
         android:textColor="@color/black"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
             android:fontFamily="@font/roboto"
             android:text="@string/opt_negative_wos"
             android:textColor="@color/black"
-            android:textSize="14dp"
+            android:textSize="14sp"
             tools:layout_editor_absoluteX="82dp"
             tools:layout_editor_absoluteY="195dp" />
 
@@ -55,7 +55,7 @@
             android:fontFamily="@font/roboto"
             android:text="@string/opt_positive"
             android:textColor="@color/black"
-            android:textSize="14dp" />
+            android:textSize="14sp" />
 
         <RadioButton
             android:id="@+id/voids"
@@ -65,7 +65,7 @@
             android:fontFamily="@font/roboto"
             android:text="@string/opt_void"
             android:textColor="@color/black"
-            android:textSize="14dp" />
+            android:textSize="14sp" />
 
         <RadioButton
             android:id="@+id/negative_ws"
@@ -75,7 +75,7 @@
             android:fontFamily="@font/roboto"
             android:text="@string/opt_negative_ws"
             android:textColor="@color/black"
-            android:textSize="14dp" />
+            android:textSize="14sp" />
     </RadioGroup>
 
 
@@ -88,8 +88,8 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto"
         android:text="@string/submit_button"
-        android:visibility="invisible"
-        app:backgroundTint="#2196F3"
+        android:textSize="18sp"
+        app:backgroundTint="#009688"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -101,9 +101,9 @@
         android:layout_marginRight="24dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto"
-        android:visibility="invisible"
         android:text="@string/close_button"
-        app:backgroundTint="#2196F3"
+        android:textSize="18sp"
+        app:backgroundTint="#009688"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -117,7 +117,7 @@
         android:fontFamily="@font/roboto"
         android:text="@string/photo_sent"
         android:textColor="@color/black"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lft_options" />
@@ -132,7 +132,7 @@
         android:fontFamily="@font/roboto"
         android:text="@string/response_sent"
         android:textColor="@color/black"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_responseSent" />

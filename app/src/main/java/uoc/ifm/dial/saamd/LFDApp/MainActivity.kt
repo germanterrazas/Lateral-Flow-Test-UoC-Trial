@@ -37,19 +37,7 @@ import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-        private const val CAMERA_PERMISSION_CODE = 1
-        private const val REQUEST_IMAGE_CAPTURE = 1
-        internal const val JPEG_COMPRESSION_FOR_EXTRA = 50
 
-        // Used to message the user through showToast()
-        private const val CAMERA_PERMISSION_DENIED = "Permission for camera denied"
-
-        // Used in dispatchTakePictureIntent()
-        private const val APP_URI_NAME = "uoc.ifm.dial.saamd.LFDApp"
-    }
-
-//    private lateinit var theLFDImage: Bitmap
     private lateinit var currentPhotoPath: String
     private lateinit var photoTimestamp: Date
     private lateinit var photoURI: Uri
@@ -93,11 +81,10 @@ class MainActivity : AppCompatActivity() {
                     ActivityCompat.requestPermissions(
                         this,
                         arrayOf(Manifest.permission.CAMERA),
-                        CAMERA_PERMISSION_CODE
+                        Constants.CAMERA_PERMISSION_CODE
                     )
                 }
         }
-
     }
 
     // The device requests the user permission to use the camera
@@ -107,11 +94,11 @@ class MainActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode == CAMERA_PERMISSION_CODE){
+        if(requestCode == Constants.CAMERA_PERMISSION_CODE){
             if(grantResults.isNotEmpty() && grantResults[0]==PackageManager.PERMISSION_GRANTED){
                 dispatchTakePictureIntent()
             } else {
-                showToast(CAMERA_PERMISSION_DENIED, Toast.LENGTH_LONG, Gravity.CENTER, 0, 0)
+                showToast(Constants.CAMERA_PERMISSION_DENIED, Toast.LENGTH_LONG, Gravity.CENTER, 0, 0)
             }
         }
     }
@@ -149,12 +136,12 @@ class MainActivity : AppCompatActivity() {
                 photoFile?.also {
                     photoURI = FileProvider.getUriForFile(
                             this,
-                            APP_URI_NAME,
+                            Constants.APP_URI_NAME,
                             it
                     )
                     Log.d("path", photoURI.toString())
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+                    startActivityForResult(takePictureIntent, Constants.REQUEST_IMAGE_CAPTURE)
                 }
             }
         }
@@ -163,7 +150,7 @@ class MainActivity : AppCompatActivity() {
     // Accesses the picture stored in Android/data/uoc.ifm.dial.saamd.LFDApp/files/Pictures
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_IMAGE_CAPTURE){
+        if(resultCode == Activity.RESULT_OK && requestCode == Constants.REQUEST_IMAGE_CAPTURE){
                 val inputStream: InputStream? = contentResolver.openInputStream(photoURI)
                 val theLFDImage = BitmapFactory.decodeStream(inputStream)
                 val ivImage = findViewById<AppCompatImageView>(R.id.iv_image)
