@@ -8,16 +8,15 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="318dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_width="241dp"
+        android:layout_height="26dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto"
         android:text="@string/options_list"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
