@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lateral Flow Test Support</string>
+    <string name="app_name">Lateral Flow Device Support</string>
     <string name="cam_button">CAMERA</string>
     <string name="process_button">NEXT</string>
     <string name="testID_label">Device ID</string>
@@ -13,7 +13,7 @@
 
     <string name="next_button">NEXT</string>
     <string name="start_button">START</string>
-    <string name="label_launch">This app collects reference information from specific lateral flow tests to help healthcare professionals use their knowledge to make a decision.</string>
+    <string name="label_launch">This app collects reference information from lateral flow devices to help healthcare professionals use their knowledge to make a decision.</string>
 
     <string name="registration_title">Consent Request</string>
     <string name="label_on_data">All the data that you upload via this app will be anonymised.</string>
