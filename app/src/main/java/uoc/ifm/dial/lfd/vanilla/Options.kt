@@ -1,4 +1,4 @@
-package uoc.ifm.dial.saamd.LFDApp
+package uoc.ifm.dial.lfd.vanilla
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -17,8 +17,8 @@ import androidx.core.content.ContextCompat
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
-import uoc.ifm.dial.saamd.LFDApp.util.Constants
-import uoc.ifm.dial.saamd.LFDApp.util.SharedPreferences
+import uoc.ifm.dial.lfd.vanilla.util.Constants
+import uoc.ifm.dial.lfd.vanilla.util.SharedPreferences
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.io.InputStream

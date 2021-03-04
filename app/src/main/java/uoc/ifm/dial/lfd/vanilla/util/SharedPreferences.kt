@@ -1,4 +1,4 @@
-package uoc.ifm.dial.saamd.LFDApp.util
+package uoc.ifm.dial.lfd.vanilla.util
 
 import android.content.Context
 import android.content.SharedPreferences

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="uoc.ifm.dial.saamd.LFDApp">
+    package="uoc.ifm.dial.lfd.vanilla">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -22,10 +22,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DIALLFDapp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Options" />
-        <activity android:name=".UserRegistration" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".LaunchActivity">
+        <activity android:name="uoc.ifm.dial.lfd.vanilla.Options" />
+        <activity android:name="uoc.ifm.dial.lfd.vanilla.UserRegistration" />
+        <activity android:name="uoc.ifm.dial.lfd.vanilla.MainActivity" />
+        <activity android:name="uoc.ifm.dial.lfd.vanilla.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,7 +39,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="uoc.ifm.dial.saamd.LFDApp"
+            android:authorities="uoc.ifm.dial.lfd.vanilla"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

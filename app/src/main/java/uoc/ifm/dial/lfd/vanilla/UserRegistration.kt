@@ -1,4 +1,4 @@
-package uoc.ifm.dial.saamd.LFDApp
+package uoc.ifm.dial.lfd.vanilla
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,8 +6,8 @@ import android.text.method.LinkMovementMethod
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import uoc.ifm.dial.saamd.LFDApp.util.Constants
-import uoc.ifm.dial.saamd.LFDApp.util.SharedPreferences
+import uoc.ifm.dial.lfd.vanilla.util.Constants
+import uoc.ifm.dial.lfd.vanilla.util.SharedPreferences
 
 class UserRegistration : AppCompatActivity() {
 

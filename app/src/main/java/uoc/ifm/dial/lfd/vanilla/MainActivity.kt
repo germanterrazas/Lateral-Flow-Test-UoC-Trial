@@ -1,4 +1,4 @@
-package uoc.ifm.dial.saamd.LFDApp
+package uoc.ifm.dial.lfd.vanilla
 
 import android.Manifest
 import android.app.Activity
@@ -21,11 +21,11 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import uoc.ifm.dial.saamd.LFDApp.util.Constants
-import uoc.ifm.dial.saamd.LFDApp.util.Constants.Companion.INTENT_DATE
-import uoc.ifm.dial.saamd.LFDApp.util.Constants.Companion.INTENT_LFD_IMAGE
-import uoc.ifm.dial.saamd.LFDApp.util.Constants.Companion.INTENT_LFD_IMAGE_NAME
-import uoc.ifm.dial.saamd.LFDApp.util.Constants.Companion.INTENT_TIME
+import uoc.ifm.dial.lfd.vanilla.util.Constants
+import uoc.ifm.dial.lfd.vanilla.util.Constants.Companion.INTENT_DATE
+import uoc.ifm.dial.lfd.vanilla.util.Constants.Companion.INTENT_LFD_IMAGE
+import uoc.ifm.dial.lfd.vanilla.util.Constants.Companion.INTENT_LFD_IMAGE_NAME
+import uoc.ifm.dial.lfd.vanilla.util.Constants.Companion.INTENT_TIME
 import java.io.File
 import java.io.IOException
 import java.io.InputStream

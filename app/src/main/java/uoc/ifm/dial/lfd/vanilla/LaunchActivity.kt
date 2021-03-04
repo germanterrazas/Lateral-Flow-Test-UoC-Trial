@@ -1,11 +1,11 @@
-package uoc.ifm.dial.saamd.LFDApp
+package uoc.ifm.dial.lfd.vanilla
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import uoc.ifm.dial.saamd.LFDApp.util.Constants
-import uoc.ifm.dial.saamd.LFDApp.util.SharedPreferences
+import uoc.ifm.dial.lfd.vanilla.util.Constants
+import uoc.ifm.dial.lfd.vanilla.util.SharedPreferences
 
 class LaunchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

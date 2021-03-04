@@ -15,7 +15,7 @@
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/launcher_image" />
+        app:srcCompat="@drawable/vanilla_app_banner" />
 
     <Button
         android:id="@+id/button_start"

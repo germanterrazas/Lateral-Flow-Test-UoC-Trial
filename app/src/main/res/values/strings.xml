@@ -1,8 +1,7 @@
 <resources>
-    <string name="app_name">COVID-19 Lateral Flow Test Support</string>
+    <string name="app_name">Lateral Flow Test Support</string>
     <string name="cam_button">CAMERA</string>
     <string name="process_button">NEXT</string>
-    <string name="covid19_label">COVID-19 Test</string>
     <string name="testID_label">Device ID</string>
     <string name="result_label">Result</string>
     <string name="time_label">Time</string>
@@ -14,7 +13,7 @@
 
     <string name="next_button">NEXT</string>
     <string name="start_button">START</string>
-    <string name="label_launch">This app collects reference information from specific COVID-19 lateral flow tests to help healthcare professionals use their knowledge to make a decision.</string>
+    <string name="label_launch">This app collects reference information from specific lateral flow tests to help healthcare professionals use their knowledge to make a decision.</string>
 
     <string name="registration_title">Consent Request</string>
     <string name="label_on_data">All the data that you upload via this app will be anonymised.</string>
